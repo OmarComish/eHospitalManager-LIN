@@ -5,6 +5,9 @@
 class utilities {
     appconfig = new AppConfiguration();
     facilitycollection =[];
+    districtcollection =[];
+    ownerscollection = [];
+
     notificationMessage(msge, title, state){
       if(state.match(/success/)) toastr.success(msge,title);
       if(state.match(/error/)) toastr.error(msge,title);
@@ -322,6 +325,24 @@ class utilities {
       }
     }
 
+    fetchDistrictData=()=>{
+      this.sendHttpRequest
+      utils.sendHttpRequest('GET','https://zipatala.health.gov.mw/api/districts',{}).then(response=>{
+        if(Object.keys(response).length != 0){
+            this.districtcollection = response;
+        }
+      }).catch(error=>console.log(error))
+    }
+
+    fetchOwnerData=()=>{
+      this.sendHttpRequest
+      utils.sendHttpRequest('GET','https://zipatala.health.gov.mw/api/owners',{}).then(response=>{
+        if(Object.keys(response).length != 0){
+            this.ownerscollection = response;
+        }
+      }).catch(error=>console.log(error))
+    }
+
     fetchFacilityData=()=>{
          this.sendHttpRequest
          utils.sendHttpRequest('GET','https://zipatala.health.gov.mw/api/facilities',{}).then(response=>{
@@ -331,8 +352,22 @@ class utilities {
          }).catch(error=>console.log(error))
     }
 
+    addDistrict=()=>{
+      let url = '/Home/AddDistrict';
+        for(let d  = 0; d < this.districtcollection.length; d ++){
+          var record = {
+                    DistrictName: this.districtcollection[d].district_name,
+                    DistrictCode: this.districtcollection[d].district_code,
+                    Zone: this.districtcollection.zone_id
+          };
+          this.sendHttpRequest('POST',url, record).then(response=>{
+            console.log(response);
+          }).catch(error=>console.log(error));
+        }
+    }
+
     addFacility=()=>{
-      
+
         let url = '/Home/AddFacility';
         for(let k = 0; k < this.facilitycollection.length; k ++){
           var record = {FacilityCode: this.facilitycollection[k].facility_code,

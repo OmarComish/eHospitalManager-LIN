@@ -9,6 +9,8 @@ namespace eHospitalManager_LIN.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
+        public int ZoneId { get; set; }
+        public string DistrictCode { get; set; }
        
     }
 }
