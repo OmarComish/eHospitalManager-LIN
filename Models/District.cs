@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eHospitalManager_LIN.Models
@@ -11,6 +12,7 @@ namespace eHospitalManager_LIN.Models
         public string DistrictName { get; set; }
         public int ZoneId { get; set; }
         public string DistrictCode { get; set; }
+        public DateTime DateCreated { get; set; }
        
     }
 }

@@ -11,6 +11,8 @@ namespace eHospitalManager_LIN.BLL
         public interface iFacilityManager
         {
             string[] AddFacility(Facility facility);
+            string[] AddDistrict(District district);
+            string[] AddOwner(Owner owner);
         }
     
 }
