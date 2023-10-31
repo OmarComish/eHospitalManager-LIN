@@ -67,45 +67,42 @@ const view = {
               +'<button id="plain">Plain</button><button id="inverted">Inverted</button></figure></div></div></div></div></div></div>'
               +'<div class="card-footer"><button id="prevchart" onclick="NextPage();">Prev</button><button id="nextchart" onclick="NextPage();">Next</button></div>'   
               +'</div></div></div></div>'],
-    wallets: ['<form id = "resultid" enctype="multipart/form-data" method="post" onsubmit="AJAXSubmit(this.id);return false;" >'+
-    '<div class="form-row"><div class="form-group col-md-4"><label for="dateApplied">Case date</label>'+
-    '<input type="date" class="form-control datetimepicker" id="complaintdate" name="DateApplied">'+
-    '</div><div class="form-group col-md-4"><label for="SubmissionMode">Case category</label>'+
-    '<select id="issuetype" name="IssueType" class="form-control" ><option selected disabled>Select...</option>'+
-    '</select></div><div class="form-group col-md-4"><label for="SubmissionMode">Case type</label><select id="casetype" name="CaseType" class="form-control" >'+
-    '<option selected disabled>Select...</option></select></div></div><div class="form-row"><div class="form-group col-md-4">'+
-    '<label for="CustomerName">Customer name</label><input type="text" class="form-control" id="customername">'+
-    '</div><div class="form-group col-md-4"><label for="ContactNumber">Contact number</label><input type="text" class="form-control" id="contactnumber">'+
-    '</div><div class="form-group col-md-4"><label for="AccountNumber">Account number</label><input type="text" class="form-control" id="accountnumber">'+
-    '</div></div><div class="form-row"><div class="form-group col-md-4"><label for="dateOfBirth">Date of birth</label>'+
-    '<input type="date" class="form-control datetimepicker" id="dateofbirth" name="DateofBirth"></div>'+
-'<div class="form-group col-md-4">'+
-'<label for="finesFunded">FinES funded</label><select id="finesfunded" name="Finesfunded" class="form-control" >'+
-    '<option value="2">No</option><option value="1">Yes</option></select>'+
-'</div><div class="form-group col-md-4"><label for="dateOfBirth">Person responsible</label>'+
-    '<input type="text" class="form-control" id="personresponsible" name="personresponsible"></div></div>'+ 
-'<div class="form-row">'+
-'<div class="form-group col-md-4">'+
-'<label for="finesFunded">Gender</label><select id="gender" name="Gender" class="form-control" >'+
-    '<option value="Male">Male</option><option value="Female">Female</option></select></div>'+
-'<div class="form-group col-md-8"><label for="ComplaintNature">Detail /Nature of Case</label>'+
-    '<input type="text" class="form-control" id="complaintnature"></div></div><div class="form-row"><div class="form-group col-md-4">'+
-    '<label for="SubmissionMode">Mode of Submission</label><select id="submissionmode" name="UserType" class="form-control" >'+
-    '<option selected disabled>Select...</option></select></div><div class="form-group col-md-4"><label for="Branch">Branch</label>'+
-    '<select id="branch" name="UserType" class="form-control" ><option selected disabled>Select...</option></select>'+
-    '</div><div class="form-group col-md-4"><label for="SubmissionMode">Escalation</label><select id="escalation" name="UserType" class="form-control" >'+
-    '<option selected disabled>Select department...</option></select></div></div><div class="form-row"><div class="form-group col-md-6">'+
-    '<label for="Resolution">Resolution</label><input type="text" class="form-control" id="resolution"></div><div class="form-group col-md-3">'+
-    '<label for="ResolutionDate">Date of Resolution</label><input type="date" class="form-control datetimepicker" id="resolutiondate" name="ResolutionDate">'+
-    '</div><div class="form-group col-md-3"><label for="SubmissionMode">Status</label><select id="status" name="status" class="form-control" >'+
-    '<option selected disabled>Select...</option></select></div></div>'+
-'<div class="form-row"><div class="form-group col-md-8">'+
-    '<label for="Comments">Comments</label><input type="text" class="form-control" id="remarks"></div>'+
-'<div class="form-group col-md-4">'+
-'<label for="finesFunded">Resosultion accepted</label><select id="resolutionaccepted" name="resolutionaccepted" class="form-control" >'+
-    '<option value="2">No</option><option value="1">Yes</option></select></div>'+
-'</div><div class="form-control">'+
-    '</div></div><button type="button" class="btn btn-danger" onclick="SubmitFeedBackForm();">Submit</button></form></form>'],
+    wallets: ['<div class="row">'+
+    '<div class="col-md-6 pr-1">'+
+    '<div class="form-group">'+
+    '<label>Facility Name</label>'+
+    '<input type="text" class="form-control" placeholder="Facility Name" id="facility_name" pattern="^[a-zA-Z ]*$"'+
+    'placeholder="last name" title="First name is required" data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);"'+
+    'data-required-error="First name cannot be blank"  required>'+
+    '<span id="error-label-first_name"></span>    '+
+    '</div>'+
+    ' </div>'+
+    '<div class="col-md-6 pr-1">'+
+    '<div class="form-group">'+
+    '<label>Facility Code</label>'+
+    '<input type="text" class="form-control" placeholder="facility code" id="facility_code" '+
+    'data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);">'+
+    '<span id="error-label-middle_name"></span>  '+
+    '</div>'+
+    '</div>'+
+    '</div>'+
+    ' <div class="row">'+
+    ' <div class="form-group col-md-6">'+
+    ' <label>Distcrict</label>'+
+    '<select class="form-control" id="district" data-required-error="district cannot be blank" required name="Casecategory">'+
+    ' <option >District</option>'+
+    ' </select>'+
+    ' </div> '+
+    ' <div class="form-group col-md-6">'+
+    ' <label>Owner</label>'+
+    ' <select class="form-control" id="facilityowner" data-required-error="Owner cannot be blank" required name="Casecategory">'+
+    ' <option >Owner</option>'+
+    '</select>'+
+    '  </div> '+
+    '  </div>'+
+    '<div class="btn-group  btn-group-md">'+
+    '<button type="button" id="loadDataTableBtn" class="btn btn-sm btn-outline-danger"  onclick="utils.addFacility();">Save</button>'+
+'</div>'],
     AdminApprove: ['<div class="table-responsive"><table id="cases_tbl" class="display" width="100%">'+
                     '<thead><tr><th>Ref No</th><th id="spot-1">Date of Complaints</th><th id="spot-2">Complainant Details</th><th>Gender</th><th>Age</th><th>Mode of Submission</th>'+
                     '<th>Branch/Service centre involved</th><th id="spot-3">Nature/Details of Complaint</th><th>Resolution</th><th>Responsible Person</th>'+

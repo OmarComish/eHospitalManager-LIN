@@ -92,7 +92,7 @@ class utilities {
             document.getElementById('moduletitle').innerHTML = "New Facility";
 
             this.fillselectlist();
-            $('#newfacility_modal').modal('show');
+            //$('#newfacility_modal').modal('show');
              //PopulateListControls();
             //PopulateSystemListControls();
             //PopulateUserTypeListControls();
@@ -387,12 +387,13 @@ class utilities {
         let url = '/Home/AddFacility';
           var record = {FacilityCode: document.getElementById('facility_code').value,
                         FacilityName: document.getElementById('facility_name').value,
-                        DistrictId: parseInt(document.getElementById('district').value),
+                        DistrictId: document.getElementById('district').value,
                         OwnerId: parseInt(document.getElementById('facilityowner').value)};
+                        console.log(record)
 
-                this.sendHttpRequest('POST',url, record).then(response=>{
-                  console.log(response);
-                }).catch(error=>console.log(error));
+          this.sendHttpRequest('POST',url, record).then(response=>{
+            console.log(response);
+          }).catch(error=>console.log(error));
           
     }
 
@@ -401,7 +402,7 @@ class utilities {
       this.initialisationdata.vmDistricts.forEach(element => {
           $('#district').append('<option value ="'+ element.districCode + '">'+ element.districtName + '</option>');
       });
-      this.initialisationdata.drawperiodicity.forEach(element => {
+      this.initialisationdata.vmOwnerList.forEach(element => {
           $('#facilityowner').append('<option value ="'+ element.id + '">'+ element.facility + '</option>');
       });
     }
