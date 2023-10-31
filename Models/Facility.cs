@@ -10,9 +10,12 @@ namespace eHospitalManager_LIN.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; } 
-        public string facility_code { get; set; }
-        public string facility_name { get; set; }
-        public int district_id { get; set; }
-        public int owner_id { get; set; }
+        public string FacilityCode { get; set; }
+        public string FacilityName { get; set; }
+        public int DistrictId { get; set; }
+        public int OwnerId { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string CommonName { get; set; }
+        public string RegistrationNumber { get; set; }
     }
 }

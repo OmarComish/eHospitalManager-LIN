@@ -4,6 +4,7 @@
 //LAST MODIFIED: 13-Feb-2020
 class utilities {
     appconfig = new AppConfiguration();
+    facilitycollection =[];
     notificationMessage(msge, title, state){
       if(state.match(/success/)) toastr.success(msge,title);
       if(state.match(/error/)) toastr.error(msge,title);
@@ -319,6 +320,35 @@ class utilities {
       for (const [key, value] of Object.entries(object)) {
         document.getElementById(value).value = '';
       }
+    }
+
+    fetchFacilityData=()=>{
+         this.sendHttpRequest
+         utils.sendHttpRequest('GET','https://zipatala.health.gov.mw/api/facilities',{}).then(response=>{
+           if(Object.keys(response).length != 0){
+               this.facilitycollection = response;
+           }
+         }).catch(error=>console.log(error))
+    }
+
+    addFacility=()=>{
+      
+        let url = '/Home/AddFacility';
+        for(let k = 0; k < this.facilitycollection.length; k ++){
+          var record = {FacilityCode: this.facilitycollection[k].facility_code,
+                        FacilityName: this.facilitycollection[k].facility_name,
+                        DistrictId: this.facilitycollection[k].district_id,
+                        OwnerId: this.facilitycollection[k].owner_id,
+                        DateCreated: this.facilitycollection[k].created_at,
+                        CommonName: this.facilitycollection[k].common_name,
+                        RegistrationNumber: this.facilitycollection[k].registration_number};
+
+                this.sendHttpRequest('POST',url, record).then(response=>{
+                  console.log(response);
+                }).catch(error=>console.log(error));
+          }
+            
+
     }
 }
 
