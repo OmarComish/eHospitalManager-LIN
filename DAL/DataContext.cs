@@ -13,6 +13,8 @@ namespace eHospitalManager_LIN.DAL
     public class DataContext : DbContext
     {
         public DbSet<Facility> Facility  { get; set; }
+        public DbSet<Owner> Owner { get; set; }
+        public DbSet<District> District { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()

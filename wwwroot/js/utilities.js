@@ -291,9 +291,13 @@ class utilities {
         menuitem +='<i class="material-icons" id="dashboard">dashboard</i>';
         menuitem +='<p id="dash">Dashboard</p></a></li>';
 
+        menuitem +='<li class="nav-item">';
+        menuitem +='<a class="nav-link" id="newcase" href="#" onclick="loadView(this.id)">';
+        menuitem +='<i class="material-icons">post_add</i><p>New Facility</p></a></li>';
+
         menuitem +='<li class="nav-item ">';
         menuitem +='<a class="nav-link" id="caselisting" href="#" onclick="loadView(this.id)">';
-        menuitem +='<i class="material-icons">search</i><p>View Cases</p></a></li>';
+        menuitem +='<i class="material-icons">search</i><p>Facility listing</p></a></li>';
   
         menuitem +='<li class="nav-item ">';
         menuitem +='<a class="nav-link" id="settings" href="#" onclick="loadView(this.id)">';
@@ -302,11 +306,11 @@ class utilities {
       } else {
         menuitem +='<li class="nav-item active">';
         menuitem +='<a class="nav-link" id="newcase" href="#" onclick="loadView(this.id)">';
-        menuitem +='<i class="material-icons">post_add</i><p>New Case</p></a></li>';
+        menuitem +='<i class="material-icons">post_add</i><p>New Facility</p></a></li>';
   
         menuitem +='<li class="nav-item ">';
         menuitem +='<a class="nav-link" id="caselisting" href="#" onclick="loadView(this.id)">';
-        menuitem +='<i class="material-icons">search</i><p>View Cases</p></a></li>';
+        menuitem +='<i class="material-icons">search</i><p>Facility Listings</p></a></li>';
       }
       document.getElementById('navigation-items').innerHTML = menuitem;
     }
