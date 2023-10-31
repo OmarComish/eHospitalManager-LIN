@@ -13,7 +13,7 @@ namespace eHospitalManager_LIN.Models
         public string FacilityCode { get; set; }
         public string FacilityName { get; set; }
         public string DistrictId { get; set; }
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         public DateTime DateCreated { get; set; }
         public string CommonName { get; set; }
         public string RegistrationNumber { get; set; }
