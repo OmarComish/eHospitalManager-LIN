@@ -1,6 +1,7 @@
 ﻿using System;
 using eHospitalManager_LIN.DAL;
 using System.Linq;
+using System.Collections.Generic;
 using eHospitalManager_LIN.Models;
 
 namespace eHospitalManager_LIN.BLL
@@ -56,6 +57,29 @@ namespace eHospitalManager_LIN.BLL
                     response[0] = "success";
                     response[1] = "District " + district.DistrictName + "  added successfully";
                 }
+                return response;
+            }
+        }
+        public VModels GetInitialisation()
+        {
+            using(var context = new DataContext())
+            {
+                var owns = (from o in context.Owner
+                            select new VMOwner {
+                                Id = o.Id, Facility = o.FacilityOwner
+                            }).ToList<VMOwner>();
+
+                var dist = (from d in context.District
+                            select new VMDistrict
+                            {
+                                DistricCode = d.DistrictCode,
+                                DistrictName = d.DistrictName
+                            }).ToList<VMDistrict>();
+
+                var response = new VModels { 
+                    VMOwnerList =  owns,
+                    VMDistricts = dist
+                };
                 return response;
             }
         }

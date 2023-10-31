@@ -42,5 +42,23 @@ namespace eHospitalManager_LIN.Controllers
             var response = await Task.Run(() => _facilitymanager.AddFacility(facility));
             return Ok(response);
         }
+        [HttpPost]
+        public async Task<IActionResult> AddDistrict([FromBody] District district)
+        {
+            var response = await Task.Run(() => _facilitymanager.AddDistrict(district));
+            return Ok(response);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddOwner([FromBody] Owner owner)
+        {
+            var response = await Task.Run(() => _facilitymanager.AddOwner(owner));
+            return Ok(response);
+        }
+        [HttpGet]
+        public async Task<IActionResult> InitialisationData()
+        {
+            var response = await Task.Run(() => _facilitymanager.GetInitialisation());
+            return Ok(response);
+        }
     }
 }

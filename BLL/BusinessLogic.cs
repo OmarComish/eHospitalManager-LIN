@@ -13,6 +13,7 @@ namespace eHospitalManager_LIN.BLL
             string[] AddFacility(Facility facility);
             string[] AddDistrict(District district);
             string[] AddOwner(Owner owner);
+            VModels GetInitialisation();
         }
     
 }
