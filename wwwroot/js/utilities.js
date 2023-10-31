@@ -7,6 +7,7 @@ class utilities {
     facilitycollection =[];
     districtcollection =[];
     ownerscollection = [];
+    initialisationdata =[];
 
     notificationMessage(msge, title, state){
       if(state.match(/success/)) toastr.success(msge,title);
@@ -85,18 +86,21 @@ class utilities {
             $('#datefiltermodal').modal('show');
         }
         
-        if(id==='newcase'){
+        if(id==='newfacility'){
             document.getElementById('main-app-content').innerHTML = view.wallets[0];
-            document.getElementById('topHeader').innerHTML = "New Case";
-            document.getElementById('moduletitle').innerHTML = "New Case";
-            PopulateListControls();
-            PopulateSystemListControls();
-            PopulateUserTypeListControls();
-            PopulateBranchListControls();
-            PopulateDepartmentListControls();
-            PopulateEmployeeDetailsListControls();
-            PopulatesubmissionModeListControls();
-            PositionListControls();
+            document.getElementById('topHeader').innerHTML = "New Facility";
+            document.getElementById('moduletitle').innerHTML = "New Facility";
+
+            this.fillselectlist();
+            $('#newfacility_modal').modal('show');
+             //PopulateListControls();
+            //PopulateSystemListControls();
+            //PopulateUserTypeListControls();
+            //PopulateBranchListControls();
+            //PopulateDepartmentListControls();
+           // PopulateEmployeeDetailsListControls();
+            //PopulatesubmissionModeListControls();
+            //PositionListControls();
             //initDatatable();
             //loadDateFilterModal();
             //filterFunction();
@@ -296,7 +300,7 @@ class utilities {
         menuitem +='<p id="dash">Dashboard</p></a></li>';
 
         menuitem +='<li class="nav-item">';
-        menuitem +='<a class="nav-link" id="newcase" href="#" onclick="loadView(this.id)">';
+        menuitem +='<a class="nav-link" id="newfacility" href="#" onclick="loadView(this.id)">';
         menuitem +='<i class="material-icons">post_add</i><p>New Facility</p></a></li>';
 
         menuitem +='<li class="nav-item ">';
@@ -365,25 +369,49 @@ class utilities {
           }).catch(error=>console.log(error));
         }
     }
+    addOwner=()=>{
+      let url = '/Home/AddOwner';
+        for(let d  = 0; d < this.ownerscollection.length; d ++){
+          var record = {
+                    FacilityOwner: this.ownerscollection[d].facility_owner,
+                    Description: this.ownerscollection[d].description
+          };
+          this.sendHttpRequest('POST',url, record).then(response=>{
+            console.log(response);
+          }).catch(error=>console.log(error));
+        }
+    }
 
     addFacility=()=>{
 
         let url = '/Home/AddFacility';
-        for(let k = 0; k < this.facilitycollection.length; k ++){
-          var record = {FacilityCode: this.facilitycollection[k].facility_code,
-                        FacilityName: this.facilitycollection[k].facility_name,
-                        DistrictId: this.facilitycollection[k].district_id,
-                        OwnerId: this.facilitycollection[k].owner_id,
-                        DateCreated: this.facilitycollection[k].created_at,
-                        CommonName: this.facilitycollection[k].common_name,
-                        RegistrationNumber: this.facilitycollection[k].registration_number};
+          var record = {FacilityCode: document.getElementById('facility_code').value,
+                        FacilityName: document.getElementById('facility_name').value,
+                        DistrictId: parseInt(document.getElementById('district').value),
+                        OwnerId: parseInt(document.getElementById('facilityowner').value)};
 
                 this.sendHttpRequest('POST',url, record).then(response=>{
                   console.log(response);
                 }).catch(error=>console.log(error));
-          }
-            
+          
+    }
 
+    fillselectlist=()=>{
+
+      this.initialisationdata.vmDistricts.forEach(element => {
+          $('#district').append('<option value ="'+ element.districCode + '">'+ element.districtName + '</option>');
+      });
+      this.initialisationdata.drawperiodicity.forEach(element => {
+          $('#facilityowner').append('<option value ="'+ element.id + '">'+ element.facility + '</option>');
+      });
+    }
+
+    fetchInitData=()=>{
+      utils.sendHttpRequest('GET','/Home/InitialisationData',{}).then(response=>{
+         if(Object.keys(response).length != 0){
+          this.initialisationdata = response;
+         }
+      }).catch(error=>console.log(error))
     }
 }
 

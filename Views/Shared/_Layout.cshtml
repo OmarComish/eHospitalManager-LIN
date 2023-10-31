@@ -215,8 +215,8 @@
 
 
 
-<div class="modal" id="datefiltermodal">
-        <div class="modal-dialog modal-lg" style="max-width: 800px;">
+<div class="modal" id="newfacility_modal">
+        <div class="modal-dialog modal-lg" style="max-width: 1400px;">
             <div class="modal-content">
                 <!-- Modal Header -->
                 <div class="modal-header">
@@ -227,21 +227,35 @@
                 <div class="modal-body">
                     <div>
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="dateApplied">From</label>
-                                <input type="date" class="form-control datetimepicker" id="complaintdatefrom" name="ComplaintDateFrom">
-                            </div>
-                             <div class="form-group col-md-6">
-                                <label for="dateApplied">To</label>
-                                <input type="date" class="form-control datetimepicker" id="complaintdateto" name="ComplaintDateTo">
-                            </div>
-
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        <label>Facility Name</label>
+                                            <input type="text" class="form-control" placeholder="Facility Name" id="facility_name" pattern="^[a-zA-Z ]*$"
+                                            placeholder="last name" title="First name is required" data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);"
+                                            data-required-error="First name cannot be blank"  required>
+                                        <span id="error-label-first_name"></span>    
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        <label>Facility Code</label>
+                                        <input type="text" class="form-control" placeholder="facility code" id="facility_code" 
+                                              data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);">
+                                        <span id="error-label-middle_name"></span>  
+                                    </div>
+                                </div>
                         </div>
                         <div class="row">
-                             <div class="form-group col-md-12">
-                                  <label>Case category</label>
-                                    <select class="form-control" id="casecategory" data-required-error="Case category cannot be blank" required name="Casecategory">
-                                            <option >Case category</option>
+                             <div class="form-group col-md-6">
+                                  <label>Distcrict</label>
+                                    <select class="form-control" id="district" data-required-error="district cannot be blank" required name="Casecategory">
+                                            <option >District</option>
+                                </select>
+                             </div> 
+                               <div class="form-group col-md-6">
+                                  <label>Owner</label>
+                                    <select class="form-control" id="facilityowner" data-required-error="Owner cannot be blank" required name="Casecategory">
+                                            <option >Owner</option>
                                 </select>
                              </div> 
                         </div>
@@ -250,7 +264,7 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <div class="btn-group  btn-group-md">
-                         <button type="button" id="loadDataTableBtn" class="btn btn-sm btn-outline-danger" data-dismiss="modal" onclick="loadComplaintsDataTable();">Continue</button>
+                         <button type="button" id="loadDataTableBtn" class="btn btn-sm btn-outline-danger"  onclick="utils.addFacility();">Save</button>
                          <button type="button" id="saveBtn" class="btn btn-sm btn-danger" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -270,26 +284,7 @@
                 <div class="modal-body">
                     <div>
                         <form id="user_profile_form">
-                           <div class="row">
-                                <div class="col-md-6 pr-1">
-                                    <div class="form-group">
-                                        <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="First Name" id="first_name" pattern="^[a-zA-Z ]*$"
-                                            placeholder="last name" title="First name is required" data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);"
-                                            data-required-error="First name cannot be blank"  required>
-                                        <span id="error-label-first_name"></span>    
-                                    </div>
-                                </div>
-                                <div class="col-md-6 pr-1">
-                                    <div class="form-group">
-                                        <label>Middle Name</label>
-                                        <input type="text" class="form-control" placeholder="Middle Name" id="middle_name" 
-                                              data-kvaluetype="text" onchange="datavalidator.elementvalidator(this.id);">
-                                        <span id="error-label-middle_name"></span>  
-                                    </div>
-                                </div>
 
-                           </div>
 
                             <div class="row">
                                 <div class="col-md-6 pr-1">
@@ -539,8 +534,12 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script>
          utils = new utilities();
+         function loadView(id) {
+            utils.loadContent(id);
+         }
          $(function(){
              utils.loadNavigation(1);
+             utils.fetchInitData();
          });
   
     </script>

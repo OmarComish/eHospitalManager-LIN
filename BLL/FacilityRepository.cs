@@ -35,7 +35,7 @@ namespace eHospitalManager_LIN.BLL
                 if (record == null)
                 {
                     owner.DateCreated = DateTime.Now;
-                    context.(owner);
+                    context.Add(owner);
                     context.SaveChanges();
                     response[0] = "success";
                     response[1] = "Owner " + owner.FacilityOwner + "  added successfully";
@@ -52,7 +52,7 @@ namespace eHospitalManager_LIN.BLL
                 if (record == null)
                 {
                     district.DateCreated = DateTime.Now;
-                    context.(district);
+                    context.Add(district);
                     context.SaveChanges();
                     response[0] = "success";
                     response[1] = "District " + district.DistrictName + "  added successfully";
